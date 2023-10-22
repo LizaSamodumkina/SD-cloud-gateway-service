@@ -1,0 +1,17 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: proxy
+  cloud:
+    gateway:
+      routes:
+        - id: song-service
+          uri: lb://SONG-SERVICE
+          predicates:
+            - Path=/api/songs/**
+        - id: resource-service
+          uri: lb://RESOURCE-SERVICE
+          predicates:
+            - Path=/api/resources/**
